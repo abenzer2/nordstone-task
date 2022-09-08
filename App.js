@@ -22,6 +22,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import AuthGuard from './src/screens/AuthGuard';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const App: () => Node = () => {
@@ -32,13 +33,13 @@ const App: () => Node = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <AuthGuard />
-    </SafeAreaView>
+    </NavigationContainer>
   );
 };
 

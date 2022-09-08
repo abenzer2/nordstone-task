@@ -51,6 +51,7 @@ const SignUpForm = () => {
           values,
           errors,
           isValid,
+          isSubmitting
         }) => (
           <>
             <Input
@@ -85,7 +86,7 @@ const SignUpForm = () => {
             <Button
               title= 'Sign Up'
               onPress={handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
             />
           </>
         )}

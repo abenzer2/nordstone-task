@@ -63,6 +63,7 @@ export default function SignInForm({setAuthMode}) {
           values,
           errors,
           isValid,
+          isSubmitting
         }) => (
           <>
             <Input
@@ -97,7 +98,7 @@ export default function SignInForm({setAuthMode}) {
             <Button
               title='Sign In'
               onPress={handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
             />
           </>
         )}

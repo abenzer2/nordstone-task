@@ -3,6 +3,8 @@ import {View, Text, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import SplashScreen from './Guest/SplashScreen';
 import AuthScreen from './Guest/AuthScreen';
+import MainBottomNavigation from '../navigations/MainBottomNavigation';
+import UserNavigation from '../navigations/UserNavigation';
 
 function AuthGuard() {
   const [initializing, setInitializing] = useState(true);
@@ -30,10 +32,7 @@ function AuthGuard() {
   }
 
   return (
-    <View>
-      <Text>Welcome {user.email}</Text>
-      <Button title='Sign Out' onPress={handleLogout} />
-    </View>
+      <MainBottomNavigation />
   );
 }
 

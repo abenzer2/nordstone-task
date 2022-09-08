@@ -50,6 +50,7 @@ const ResetEmailForm = ({setCodeSent}) => {
           values,
           errors,
           isValid,
+          isSubmitting
         }) => (
           <>
             <Input
@@ -70,7 +71,7 @@ const ResetEmailForm = ({setCodeSent}) => {
             <Button
               title="Send Reset Code"
               onPress={handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
             />
           </>
         )}

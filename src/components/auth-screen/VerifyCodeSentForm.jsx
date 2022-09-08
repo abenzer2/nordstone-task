@@ -52,6 +52,7 @@ const VerifyCodeSentForm = ({setCodeSent}) => {
           values,
           errors,
           isValid,
+          isSubmitting
         }) => (
           <>
             <Input
@@ -71,7 +72,7 @@ const VerifyCodeSentForm = ({setCodeSent}) => {
             <Button
               title="Submit"
               onPress={handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
             />
           </>
         )}
