@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, View } from 'react-native';
 
-const SignInLogo = () => {
+const AuthScreenLogo = () => {
     return (
       <View>
         {/* <Image
@@ -11,4 +11,4 @@ const SignInLogo = () => {
       </View>
     );
   };
-export default SignInLogo
+export default AuthScreenLogo

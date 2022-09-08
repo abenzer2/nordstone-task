@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import SplashScreen from './Guest/SplashScreen';
-import SignInScreen from './Guest/SignInScreen';
+import AuthScreen from './Guest/AuthScreen';
 
 function AuthGuard() {
-  // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
     if (initializing) setInitializing(false);
@@ -20,24 +18,21 @@ function AuthGuard() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  const handleLogout = () => {
+    console.log('loging out');
+    auth().signOut();
+  };
+
   if (initializing) return <SplashScreen />;
 
   if (!user) {
-    return <SignInScreen />;
+    return <AuthScreen />;
   }
-
-  const handleLogout = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  };
 
   return (
     <View>
       <Text>Welcome {user.email}</Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>Log out</Text>
-      </TouchableOpacity>
+      <Button title='Sign Out' onPress={handleLogout} />
     </View>
   );
 }

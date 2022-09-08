@@ -2,12 +2,12 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors} from '../../constants/theme';
 
-const ChooseMode = ({hasAccount, setHasAccount}) => {
-  if (hasAccount) {
+const ChooseAuthMode = ({authMode, setAuthMode}) => {
+  if (authMode == 'sign-in') {
     return (
       <View style={{flexDirection:'row'}}>
         <Text>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => setHasAccount(false)}>
+        <TouchableOpacity onPress={() => setAuthMode('sign-up')}>
           <Text
             style={{
               color: colors.primary,
@@ -21,11 +21,30 @@ const ChooseMode = ({hasAccount, setHasAccount}) => {
           <Text>here</Text>
       </View>
     );
-  } else
+  } 
+  else if(authMode== 'forgot-password') {
+    return (
+      <View style={{flexDirection:'row'}}>
+        <Text>Back to</Text>
+        <TouchableOpacity onPress={() => setAuthMode('sign-in')}>
+          <Text
+            style={{
+              color: colors.primary,
+              textDecorationLine: 'underline',
+              marginLeft:4,
+              marginRight:4
+            }}>
+            Sign In
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  else
     return (
       <View style={{flexDirection:'row'}}>
         <Text>Have an account?</Text>
-        <TouchableOpacity onPress={() => setHasAccount(true)}>
+        <TouchableOpacity onPress={() => setAuthMode('sign-in')}>
           <Text
             style={{
               color: colors.primary,
@@ -41,4 +60,4 @@ const ChooseMode = ({hasAccount, setHasAccount}) => {
     );
 };
 
-export default React.memo(ChooseMode);
+export default React.memo(ChooseAuthMode);
