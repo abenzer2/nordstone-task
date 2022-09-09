@@ -1326,6 +1326,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-15.4.0.tgz#182ac10af9417d2757adfdcd77bf26f48b5702b2"
   integrity sha512-8Vm/nJpFzjpBeIbueai+WR4m8WzzUvsOXG7oDyzvPPxAL1CkWAYQ3dKRk6KhcIaqGatvfR9Ue+k3XndRS6jSMA==
 
+"@react-native-firebase/storage@^15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-15.4.0.tgz#066af956021ab7a6dabb4a217e48befe2825c60e"
+  integrity sha512-7FUEUkWcF/2/LZyQjFEuXCgeJO6XHRHINo8JTFsWeVgQhtp8V1Wctw4pZXf8/OP29aO7iTryrlpTnoLz8r4xWg==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -5950,6 +5955,11 @@ react-native-gradle-plugin@^0.70.2:
   version "0.70.2"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.2.tgz#b5130f2c196e27c4c5912706503d69b8790f1937"
   integrity sha512-k7d+CVh0fs/VntA2WaKD58cFB2rtiSLBHYlciH18ncaT4N/B3A4qOGv9pSCEHfQikELm6vAf98KMbE3c8KnH1A==
+
+react-native-image-picker@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-4.10.0.tgz#471ca942bd1189134eff63e25903147f54aeb8c2"
+  integrity sha512-QNK4ZnFLD+BdiM1QL1jh9GUALhRXm3MV97crhnTCSMv50H6E4tq3ozgfyxF5uKz0cECbNkWswg4sjgqZKEJtww==
 
 react-native-push-notification@^8.1.1:
   version "8.1.1"
