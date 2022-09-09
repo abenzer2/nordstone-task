@@ -9,7 +9,9 @@ const Tab = createBottomTabNavigator();
 
 function MainBottomNavigation() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      headerShown:false
+    }}>
       <Tab.Screen name="Home" component={NotificationScreen} />
       <Tab.Screen name="Upload" component={UploadPhotoScreen} />
       <Tab.Screen name="Save" component={SaveTextScreen} />
