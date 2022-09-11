@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import SplashScreen from './Guest/SplashScreen';
-import AuthScreen from './Guest/AuthScreen';
-import MainBottomNavigation from '../navigations/MainBottomNavigation';
-import UserNavigation from '../navigations/UserNavigation';
+import SplashScreen from '../../screens/Guest/SplashScreen';
+import AuthNavigation from '../../navigations/AuthNavigation';
+import MainBottomNavigation from '../../navigations/MainBottomNavigation';
 
 function AuthGuard() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   function onAuthStateChanged(user) {
     setUser(user);
@@ -16,24 +15,24 @@ function AuthGuard() {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => {};
+  }, []);
+
+  useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  const handleLogout = () => {
-    console.log('loging out');
-    auth().signOut();
-  };
-
-  if (initializing) return <SplashScreen />;
+  if (initializing || loading) return <SplashScreen />;
 
   if (!user) {
-    return <AuthScreen />;
+    return <AuthNavigation />;
   }
 
-  return (
-      <MainBottomNavigation />
-  );
+  return <MainBottomNavigation />;
 }
 
 export default AuthGuard;

@@ -7,17 +7,13 @@ import {colors} from '../../constants/theme';
 import * as yup from 'yup';
 
 const verifyPasswordResetEmailSchema = yup.object().shape({
-  code: yup
-  .string()
-  .required('Code is Required'),
+  code: yup.string().required('Code is Required'),
 });
 
 const VerifyCodeSentForm = ({setCodeSent}) => {
-  
   const [errorMessage, setErrorMessage] = useState();
 
   const handleVerifyPasswordReset = values => {
-    
     setErrorMessage(null);
     auth()
       .verifyPasswordResetCode(values.code)
@@ -37,10 +33,9 @@ const VerifyCodeSentForm = ({setCodeSent}) => {
         console.error(error);
       });
   };
-  
 
   return (
-    <View style={{width: '80%'}}>
+    <View style={{width: '100%'}}>
       <Formik
         validationSchema={verifyPasswordResetEmailSchema}
         initialValues={{code: ''}}
@@ -52,7 +47,7 @@ const VerifyCodeSentForm = ({setCodeSent}) => {
           values,
           errors,
           isValid,
-          isSubmitting
+          isSubmitting,
         }) => (
           <>
             <Input
@@ -60,25 +55,42 @@ const VerifyCodeSentForm = ({setCodeSent}) => {
               placeholder="Code"
               onChangeText={handleChange('code')}
               onBlur={handleBlur('code')}
-              value={values.email}
+              value={values.code}
+              errorMessage={errors.code}
+              style={{
+                fontWeight: 'bold',
+                fontSize: 14,
+              }}
+              inputContainerStyle={{
+                borderBottomColor: colors.lightGray,
+                borderBottomWidth: 2,
+              }}
+              placeholderTextColor={colors.mediumGray}
             />
-
-            {errors.code && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.code}</Text>
-            )}
             {errorMessage && (
               <Text style={{fontSize: 10, color: 'red'}}>{errorMessage}</Text>
             )}
-            <Button
-              title="Submit"
-              onPress={handleSubmit}
-              disabled={!isValid || isSubmitting}
-            />
+
+            <View
+              style={{
+                marginTop: 20,
+              }}>
+              <Button
+                title="Submit"
+                onPress={handleSubmit}
+                disabled={!isValid || isSubmitting}
+                buttonStyle={{
+                  backgroundColor: colors.primary,
+                  borderRadius: 40,
+                  paddingVertical: 10,
+                }}
+              />
+            </View>
           </>
         )}
       </Formik>
     </View>
-  )
-}
+  );
+};
 
-export default VerifyCodeSentForm
+export default VerifyCodeSentForm;

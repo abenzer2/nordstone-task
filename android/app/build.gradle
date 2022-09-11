@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
@@ -160,6 +161,7 @@ android {
                 }
             }
         }
+        
     }
 
     if (isNewArchitectureEnabled()) {
@@ -218,6 +220,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('nordstone_task.keystore')
+            storePassword 'nordstone123@!'
+            keyAlias 'nordstone_alias'
+            keyPassword 'nordstone123@!'
+        }
     }
     buildTypes {
         debug {
@@ -226,7 +234,8 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

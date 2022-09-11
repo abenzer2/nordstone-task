@@ -21,8 +21,8 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import AuthGuard from './src/screens/AuthGuard';
 import { NavigationContainer } from '@react-navigation/native';
+import AuthGuard from './src/components/auth-gaurd/AuthGuard';
 
 
 const App: () => Node = () => {

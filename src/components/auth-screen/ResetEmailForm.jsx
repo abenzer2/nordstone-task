@@ -1,9 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import { sendPasswordResetEmail } from '@react-native-firebase/auth';
+import {sendPasswordResetEmail} from '@react-native-firebase/auth';
 import {Formik} from 'formik';
-import {Button, Input} from 'react-native-elements';
+import {Button, Icon, Input} from 'react-native-elements';
 import {colors} from '../../constants/theme';
 import * as yup from 'yup';
 
@@ -14,17 +14,21 @@ const sendPasswordResetEmailSchema = yup.object().shape({
     .required('Email Address is Required'),
 });
 
-const ResetEmailForm = ({setCodeSent}) => {
+const ResetEmailForm = () => {
   const [errorMessage, setErrorMessage] = useState();
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleSendPasswordReset = values => {
     console.log(values.email);
     setErrorMessage(null);
     auth()
-      .sendPasswordResetEmail(values.email)
+      .sendPasswordResetEmail(values.email, {
+        handleCodeInApp: true,
+        url: 'https://localhost:3000/',
+      })
       .then(res => {
         console.log(res);
-        setCodeSent(true);
+        setEmailSent(true);
       })
       .catch(error => {
         if (error.code === 'auth/invalid-email') {
@@ -37,8 +41,34 @@ const ResetEmailForm = ({setCodeSent}) => {
       });
   };
 
+  if (emailSent) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: 200,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Icon
+          size={40}
+          reverse
+          name="checkmark"
+          type="ionicon"
+          color={'green'}
+          iconStyle={{
+            fontWeight: 'bold',
+          }}
+        />
+        <Text style={{fontWeight: 'bold', marginTop: 20, textAlign:'center'}}>
+          Email Sent Successfully! Go to your email and reset your password
+        </Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={{width: '80%'}}>
+    <View style={{width: '100%'}}>
       <Formik
         validationSchema={sendPasswordResetEmailSchema}
         initialValues={{email: ''}}
@@ -50,7 +80,7 @@ const ResetEmailForm = ({setCodeSent}) => {
           values,
           errors,
           isValid,
-          isSubmitting
+          isSubmitting,
         }) => (
           <>
             <Input
@@ -60,19 +90,35 @@ const ResetEmailForm = ({setCodeSent}) => {
               onBlur={handleBlur('email')}
               value={values.email}
               keyboardType="email-address"
+              errorMessage={errors.email}
+              style={{
+                fontWeight: 'bold',
+                fontSize: 14,
+              }}
+              inputContainerStyle={{
+                borderBottomColor: colors.lightGray,
+                borderBottomWidth: 2,
+              }}
+              placeholderTextColor={colors.mediumGray}
             />
-
-            {errors.email && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.email}</Text>
-            )}
             {errorMessage && (
               <Text style={{fontSize: 10, color: 'red'}}>{errorMessage}</Text>
             )}
-            <Button
-              title="Send Reset Code"
-              onPress={handleSubmit}
-              disabled={!isValid || isSubmitting}
-            />
+            <View
+              style={{
+                marginTop: 20,
+              }}>
+              <Button
+                title="Send Reset Code"
+                onPress={handleSubmit}
+                disabled={!isValid || isSubmitting}
+                buttonStyle={{
+                  backgroundColor: colors.primary,
+                  borderRadius: 40,
+                  paddingVertical: 10,
+                }}
+              />
+            </View>
           </>
         )}
       </Formik>
